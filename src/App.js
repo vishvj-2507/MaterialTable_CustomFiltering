@@ -38,9 +38,9 @@ function App() {
     var filteredValue = tableData.filter((item) => 
     {      
       if(operator === "=")
-        status = (item.id === event.target.value)
+        status = (item.id == event.target.value)
       else if(operator === "!=")
-        status = (item.id !== event.target.value)
+        status = (item.id != event.target.value)
       else if(operator === "<")
         status = (item.id < event.target.value)
       else if(operator === ">")
@@ -91,22 +91,33 @@ function App() {
       field: "id",
       align: "left",
       sorting: true,
-      filtering: false,
+      filtering: true,
       cellStyle: {
-        width: "6%",
+        width: "7%",
       },
+      filterComponent: (props) => 
+        <FilterInput
+          {...props}
+          onChange={handleChangeFilter}
+          handleFilterClick={handleFilterClick}
+          handleClose={handleClose}
+          value={value}            
+          anchorEl={Boolean(anchorEl)}                                    
+          filterOptions={
+          ["=", "!=", "<", ">", "<=", ">="]}
+        />
     },
     {
       title: "UserName",
       field: "username",
-      filtering: false,
+      filtering: true,
       align: "center",
       filterPlaceholder: "Filter by UserName",
       cellStyle: { color: "red" },
       render: (row) => (
         <Grid container alignItems="center">
           <Grid item sm={4}>
-            <Avatar style={{ backgroundColor: "red" }}>
+            <Avatar style={{ width: 35, height: 35, backgroundColor:"red", fontSize:17}}>
               {row.username[0] + row.username[1]}
             </Avatar>
           </Grid>
@@ -133,7 +144,7 @@ function App() {
       field: "address.zipcode",
       align: "center",
       grouping: false,
-      filtering: false,
+      filtering: true,
       filterPlaceholder: "Filter by zipcode",
     },
     {
@@ -216,28 +227,29 @@ function App() {
 
           // onRowClick={(event, rowData) => console.log(rowData)}
 
-          components={{
-            FilterRow: (props, rowData) => (
-              <tr>
-                <td style={{ width: "50px" }} />
-                {filterColumn.map((column) => (
-                  <td>
-                    <FilterInput
-                      {...props}
-                      name={column.title}
-                      onChange={handleChangeFilter}
-                      handleFilterClick={handleFilterClick}
-                      handleClose={handleClose}
-                      value={value}
-                      anchorEl={Boolean(anchorEl)}
-                      filterOptions={
-                      ["=", "!=", "<", ">", "<=", ">="]}
-                    />
-                  </td>
-                ))}
-              </tr>
-            ),
-          }}
+          // components={{
+          //   FilterRow: (props, rowData) => (
+          //     <tr>
+          //       <td style={{ width: "50px" }} />
+          //       {filterColumn.map((column) => (
+          //         <td>
+          //           <FilterInput
+          //             {...props}
+          //             name={column.title}
+          //             onChange={handleChangeFilter}
+          //             handleFilterClick={handleFilterClick}
+          //             handleClose={handleClose}
+          //             value={value}
+          //             anchorEl={Boolean(anchorEl)}
+          //             filterOptions={
+          //             ["=", "!=", "<", ">", "<=", ">="]}
+          //           />
+          //         </td>
+          //       ))}
+          //     </tr>
+          //   ),
+          // }}
+
           actions={[
             {
               icon: () => <GetAppIcon />,

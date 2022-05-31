@@ -13,11 +13,8 @@ class FilterInput extends React.Component
     super(props);
     this.state = {
       name: this.props.name,
-    //   value:"",
-      placeholder: "",
       filterOptions: this.props.filterOptions,
       filterOpen: false,
-    //   anchorEl: "",
     };
   }
 
@@ -30,13 +27,13 @@ class FilterInput extends React.Component
             id={this.state.name}
             type="text"
             value={this.props.value}
-            onChange={this.props.onChange}
-            placeholder={`${this.state.placeholder}`}
+            onChange={this.props.onChange}  
+            placeholder="Id"          
             startAdornment={
-              <IconButton
+              <IconButton style={{padding:3}}
                 aria-label="Select Filter"
                 onClick={this.props.handleFilterClick}>
-                    <FilterListIcon fontSize="small" />
+                    <FilterListIcon fontSize="medium" style={{color: "#000"}}/>
               </IconButton>
             }
           />
