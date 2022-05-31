@@ -95,7 +95,7 @@ function App() {
       cellStyle: {
         width: "7%",
       },
-      filterComponent: (props) => 
+      filterComponent: (props) =>               // Custom Filter for particular column
         <FilterInput
           {...props}
           onChange={handleChangeFilter}
@@ -227,7 +227,7 @@ function App() {
 
           // onRowClick={(event, rowData) => console.log(rowData)}
 
-          // components={{
+          // components={{                               // Custom Filter for all columns
           //   FilterRow: (props, rowData) => (
           //     <tr>
           //       <td style={{ width: "50px" }} />
